@@ -17,7 +17,6 @@ import {
   UploadedFile,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-
 import { GetUser } from 'src/auth/decorator';
 import { Users } from '@prisma/client';
 
