@@ -1,0 +1,371 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["filterJson", "referentialIntegrity", "fullTextSearch"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+
+type ProductBattery {
+  Capacity   Int
+  /// Multiple data types found: Float: 1.9%, Int: 98.1% out of 319 sampled entries
+  Charge     Json?
+  /// Multiple data types found: String: 45.8%, Array(String): 54.2% out of 319 sampled entries
+  Technology Json
+  Type       String
+}
+
+type ProductCam {
+  BCamRes String?
+  FCamRes String
+  Flash   String?
+  /// Multiple data types found: String: 0.4%, Array(String): 99.6% out of 272 sampled entries
+  Special Json? 
+  /// Multiple data types found: String: 17.3%, Array(String): 82.7% out of 272 sampled entries
+  Video   Json?
+  Webcam  String?
+}
+
+type ProductConn {
+  /// Multiple data types found: String: 24.1%, Array(String): 75.9% out of 328 sampled entries
+  Blutooth     Json?
+  /// Multiple data types found: String: 21.5%, Json: 0.3%, Array(String): 78.2% out of 326 sampled entries
+  GPS          Json?
+  /// Multiple data types found: String: 62.7%, Array(String): 37.3% out of 268 sampled entries
+  Other        Json?
+  /// Multiple data types found: String: 89.5%, Array(String): 10.5% out of 324 sampled entries
+  PhoneJack    Json?
+  /// Multiple data types found: String: 98.9%, Array(String): 1.1% out of 269 sampled entries
+  Sim          Json?
+  Special      String?
+  Type         String?
+  /// Multiple data types found: String: 27%, Array(String): 73% out of 326 sampled entries
+  Wifi         Json?
+  WirelessCard String?
+}
+
+type ProductCpu {
+  /// Multiple data types found: String: 7%, Float: 53%, Int: 40% out of 315 sampled entries
+  BaseSpeed Json
+  Cache     Int?
+  Core      Int?
+  Genth     String
+  /// Multiple data types found: String: 7%, Float: 82.5%, Int: 10.5% out of 315 sampled entries
+  MaxSpeed  Json
+  Name      String
+  /// Multiple data types found: String: 7%, Int: 93% out of 315 sampled entries
+  Thread    Json
+}
+
+type ProductGraphic {
+  Core    String
+  GPUType String?
+  NameGPU String
+}
+
+type ProductOs {
+  Name    String
+  Version String?
+}
+
+type ProductRam {
+  Capacity Int
+  MaxRam   Int
+  Name     String
+  Ram      String?
+  Slots    Int
+  Speed    Int
+  Type     String?
+}
+
+type ProductRom {
+  Capacity Int
+  MaxRom   Int
+  Type     String
+}
+
+type ProductScreen {
+  HZ         Int
+  MaxBright  String
+  Resolution String
+  Size       String
+  Special    String
+  /// Multiple data types found: String: 89.2%, Array(String): 10.8% out of 315 sampled entries
+  Technology Json
+}
+
+type ProductSound {
+  /// Multiple data types found: String: 21.6%, Array(String): 78.4% out of 305 sampled entries
+  Technology Json?
+}
+
+type ProductStruct {
+  Design    String
+  High      String
+  Long      String
+  Martirial String
+  Weight    String
+  Wide      String
+}
+type OrderDetail {
+
+  Price     Int
+  /// Multiple data types found: String: 50%, Int: 50% out of 16 sampled entries
+  ProductId String 
+  Quantity  Int
+  Total     Int
+  ProductName String
+  Image String
+  Rate Boolean
+}
+
+model Cart {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  /// Multiple data types found: Int: 66.7%, BigInt: 33.3% out of 3 sampled entries
+  Price     Int
+  /// Multiple data types found: String: 66.7%, Int: 33.3% out of 3 sampled entries
+  ProductId String
+  /// Multiple data types found: Int: 66.7%, BigInt: 33.3% out of 3 sampled entries
+  Quantity  Int
+  Status    String
+  /// Multiple data types found: Int: 66.7%, BigInt: 33.3% out of 3 sampled entries
+  Total     Int
+  UserId    String
+  ProductName String
+  Picture String
+  OrderCart       DateTime @default(now())
+}
+
+model Category {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  Active       Int
+  CategoryName String
+  Picture      String
+  Type         String
+}
+
+model Content {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+}
+
+model Feedback {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  Comment     String
+  FeedbackDay DateTime @default(now())
+  ProductId   String?
+  Rate        Float? 
+  isShow      Boolean 
+  repid       String?
+  userid      String
+  username String?
+  productname String?
+}
+
+model Image {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  ImageId   Int
+  ProductId Int
+  URL       String
+}
+
+model Inventory {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  Adress      String
+  City        String
+  InventoryId Int
+  IsActive    Boolean
+  Latitude    String
+  Longitude   String
+  Name        String
+  State       String
+  TotalAmount Int
+  Hotline     String
+}
+
+model Order {
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  CustomerId     String
+  Deleted        Boolean
+  Errlog         String?
+  Errmsg         String?
+  Detail        OrderDetail[]
+  Freight        Int?
+  InventoryId    Int?
+  OTP            Int?
+  OrderDay       DateTime @default(now())
+  Paid           Int
+  PaymentDate    String?
+  ResponseCode   Int?
+  SecureHash     String?
+  ShipDate       String?
+  TransactStatus String?
+  TransactionNo  Int?
+  Voucher        String?
+  VoucherMoney   Int?
+  Status String?
+  Address       String?
+
+}
+
+model Product {
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  /// Multiple data types found: String: 5.3%, ProductBattery: 94.7% out of 337 sampled entries
+  Battery       Json
+  /// Multiple data types found: String: 6.5%, ProductCpu: 93.5% out of 337 sampled entries
+  CPU           Json
+  /// Multiple data types found: String: 6.5%, ProductCam: 93.5% out of 337 sampled entries
+  Cam           Json
+  CategoryName  String
+  Color         String
+  Conn          ProductConn
+  CurrentOrder  Int
+  Description   String
+  /// Multiple data types found: String: 6.5%, ProductGraphic: 93.5% out of 337 sampled entries
+  Graphic       Json
+  IsDelete      Boolean
+  MSRP          Int
+  Note          String
+  /// Multiple data types found: String: 1.2%, ProductOs: 98.8% out of 337 sampled entries
+  OS            Json
+  Picture       String
+  ProductDetail String
+  ProductId     Int
+  ProductName   String
+  Ram           ProductRam
+  RawPrice      Int
+  ReorderLevel  Int
+  Rom           ProductRom
+  /// Multiple data types found: String: 6.5%, ProductScreen: 93.5% out of 337 sampled entries
+  Screen        Json
+  /// Multiple data types found: String: 8.6%, ProductSound: 91.4% out of 337 sampled entries
+  Sound         Json
+  Special       String
+  Struct        ProductStruct
+  Type          String
+  UnitInOrder   Int
+  UnitPrice     Int
+  Version       String
+  View          Int
+  sold          Int
+}
+
+model Roles {
+  id               String @id @default(auto()) @map("_id") @db.ObjectId
+  ConcurrencyStamp String
+  Id               String
+  Name             String
+  NormalizedName   String
+}
+
+model UserLogin {
+  id                  String @id @default(auto()) @map("_id") @db.ObjectId
+  LoginProvider       String
+  ProviderDisplayName String
+  ProviderKey         Float
+  UserId              String
+}
+
+model UserToken {
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  LoginProvider String
+  Name          String
+  UserId        String
+  Value         String
+}
+
+model Users {
+  id                   String   @id @default(auto()) @map("_id") @db.ObjectId
+  AccessFailedCount    Int?
+  Address              String?
+  Birthday             String?
+  ConcurrencyStamp     String?
+  Email                String @unique
+  EmailConfirmed       Boolean?
+  FullName             String?
+  Id                   String?
+  LockoutEnabled       Boolean?
+  LockoutEnd           String?
+  NormalizedEmail      String?
+  NormalizedUserName   String?
+  PasswordHash         String
+  PhoneNumber          String?
+  PhoneNumberConfirmed Boolean?
+  SecurityStamp        String?
+  TwoFactorEnabled     Boolean?
+  UserName             String @unique
+  avaname                 String?
+}
+
+model Voucher {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  Code          Int
+  IsActive      Boolean
+  VoucherDetail Int
+  VoucherID     Int
+  VoucherName   String
+  loaigiam      Int
+  number        Int
+  sotientoida   Int
+}
+model contact {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  name  String
+  phone_number String
+}
+model UsersAddress{
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  UserId  String
+  Name String
+  PhoneNumber String
+  Note String?
+  Address String
+  Pick Boolean?
+}
+
+model orderDetail {
+  id  String @id @default(auto()) @map("_id") @db.ObjectId
+  OrderId String @unique
+  Price     Int
+  /// Multiple data types found: String: 50%, Int: 50% out of 16 sampled entries
+  ProductId String @unique
+  Quantity  Int
+  Total     Int
+  ProductName String
+  Image String
+  Rate Boolean
+}
+
+model ProductCrawl{
+  id  String @id @default(auto()) @map("_id") @db.ObjectId
+  ProductName String
+  UnitPrice String?
+  Picture String?
+  MSRP String?
+  rate String?
+  rating String?
+  review String?
+  url String
+  Type String
+  CategoryName String
+}
+
+model FeedbackCrawl{
+  id  String @id @default(auto()) @map("_id") @db.ObjectId
+  productid String
+  rate Float
+  cmt String?
+  username String?
+  productname String?
+}
+
+model ProductDetail{
+  id  String @id @default(auto()) @map("_id") @db.ObjectId
+  ProductId String
+  title String
+  detail String
+}
+
