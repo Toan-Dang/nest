@@ -327,13 +327,24 @@ export class UserService {
   }
 
   async uploadAva(userid: string, filename: string) {
-    return this.prisma.users.update({
-      where: {
-        id: userid,
-      },
-      data: {
-        avaname: filename,
-      },
-    });
+    try {
+      await this.prisma.users.update({
+        where: {
+          id: userid,
+        },
+        data: {
+          avaname: filename,
+        },
+      });
+      return {
+        success: true,
+        mess: 'cap nhat ava thanh cong',
+      };
+    } catch (e) {
+      return {
+        success: false,
+        e,
+      };
+    }
   }
 }
