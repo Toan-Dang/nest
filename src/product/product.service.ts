@@ -1,18 +1,17 @@
-import { json } from 'stream/consumers';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'src/prisma/prisma.service';
-
-
+import { json2csv } from 'json-2-csv';
+import { writeFileSync } from 'fs';
 @Injectable()
 export class ProductService {
-  constructor(
-    private prisma: PrismaService,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   async getAllProduct() {
-    return await this.prisma.product.findMany();
+    return await this.prisma.product.findMany({
+      distinct: ['ProductName'],
+    });
   }
   async getProductbyID(proid: string) {
     const product = await this.prisma.product.findUnique({
@@ -146,6 +145,4 @@ export class ProductService {
       },
     });
   }
-
-
 }

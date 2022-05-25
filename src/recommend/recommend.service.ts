@@ -12,19 +12,28 @@ export class RecommendService {
   ) {}
 
   async getContentBase(productid: string) {
-    const productname = await this.prisma.productCrawl.findUnique({
+    const productname = await this.prisma.product.findUnique({
       where: {
         id: productid,
       },
     });
+
     const url = 'http://127.0.0.1:5000/cb?name=' + productname.ProductName;
+
     const data = await firstValueFrom(this.httpService.get(url));
     const lst = data.data['item'];
     const res = [];
     for await (let hmu of lst) {
-      let product = await this.prisma.productCrawl.findFirst({
+      let product = await this.prisma.product.findFirst({
         where: {
           ProductName: hmu,
+        },
+        select: {
+          Picture: true,
+          ProductName: true,
+          MSRP: true,
+          UnitPrice: true,
+          id: true,
         },
       });
       res.push(product);

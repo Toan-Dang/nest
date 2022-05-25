@@ -36,7 +36,4 @@ export class ProductController {
     console.log(cate);
     return this.productService.getLapByCategory(cate);
   }
-
-
-
 }
