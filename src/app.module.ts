@@ -40,7 +40,7 @@ import { GameModule } from './game/game.module';
     CustomerModule,
     HttpModule,
     RecommendModule,
-    GameModule
+    GameModule,
   ],
 })
 export class AppModule {}

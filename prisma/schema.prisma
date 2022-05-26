@@ -369,3 +369,8 @@ model ProductDetail{
   detail String
 }
 
+model game{
+  id  String @id @default(auto()) @map("_id") @db.ObjectId
+  username String
+  score Int
+}
