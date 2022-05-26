@@ -18,6 +18,7 @@ import { StripeModule } from './stripe/stripe.module';
 import { CustomerModule } from './customer/customer.module';
 import { HttpModule } from '@nestjs/axios';
 import { RecommendModule } from './recommend/recommend.module';
+import { GameModule } from './game/game.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -38,7 +39,8 @@ import { RecommendModule } from './recommend/recommend.module';
     StripeModule.forRoot(process.env.STRIPE_KEY, { apiVersion: '2020-08-27' }),
     CustomerModule,
     HttpModule,
-    RecommendModule
+    RecommendModule,
+    GameModule
   ],
 })
 export class AppModule {}
