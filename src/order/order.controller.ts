@@ -1,3 +1,4 @@
+import { BillDto } from './dto/Bill.dto';
 import { addOrderDto } from './dto/addorder.dto';
 import { OrderService } from './order.service';
 import {
@@ -39,9 +40,9 @@ export class OrderController {
     return this.orderservice.AcceptBill(orderid);
   }
 
-  @Post('/cancel/:id')
-  cancelBill(@Param('id') orderid: string) {
-    return this.orderservice.CancelBill(orderid);
+  @Post('/cancel')
+  cancelBill(@Body() dto : BillDto) {
+    return this.orderservice.CancelBill(dto);
   }
 
   @Get('/finish')

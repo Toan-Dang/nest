@@ -1,3 +1,4 @@
+import { BillDto } from './dto/Bill.dto';
 import { addOrderDto } from './dto/addorder.dto';
 import { PrismaService } from './../prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
@@ -137,10 +138,10 @@ export class OrderService {
       mess: 'đã nhận hàng thành công',
     };
   }
-  async CancelBill(orderid: string) {
+  async CancelBill(orderid: BillDto) {
     return await this.prisma.order.update({
       where: {
-        id: orderid,
+        id: orderid.orderid,
       },
       data: {
         Status: 'Canceled',
