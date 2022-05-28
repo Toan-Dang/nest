@@ -139,7 +139,7 @@ export class OrderService {
     };
   }
   async CancelBill(orderid: BillDto) {
-    return await this.prisma.order.update({
+    await this.prisma.order.update({
       where: {
         id: orderid.orderid,
       },
@@ -147,6 +147,10 @@ export class OrderService {
         Status: 'Canceled',
       },
     });
+    return {
+      success: true,
+      mess: 'đã hủy thành công',
+    };
   }
 
   async getUserFinishBill(userid: string) {
