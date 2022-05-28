@@ -102,34 +102,4 @@ export class AuthService {
       success: true,
     };
   }
-
-  async Signin2(dto: SigninDto) {
-    //find user by email
-
-    const user = await this.prisma.users.findUnique({
-      where: {
-        UserName: dto.username,
-      },
-    });
-
-    if (!user) throw new ForbiddenException('null');
-    // if (!user) {
-    //   return {
-    //     success: false,
-    //     mess: 'Tài khoản không có',
-    //   };
-    // }
-    //compare email input with db
-    const pwMatches = await argon.verify(user.PasswordHash, dto.password);
-    if (!pwMatches)
-      throw new ForbiddenException('dung cos dang nhap nua hmu hmu');
-    // if (!pwMatches) {
-    //   return {
-    //     success: false,
-    //     mess: 'Sai mật khẩu',
-    //   };
-    // }
-
-    return this.SignToken(user.id, user.Email);
-  }
 }

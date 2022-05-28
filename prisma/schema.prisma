@@ -283,10 +283,9 @@ model Users {
   Address              String?
   Birthday             String?
   ConcurrencyStamp     String?
-  Email                String @unique
+  Email                String? @unique
   EmailConfirmed       Boolean?
   FullName             String?
-  Id                   String?
   LockoutEnabled       Boolean?
   LockoutEnd           String?
   NormalizedEmail      String?
@@ -296,8 +295,9 @@ model Users {
   PhoneNumberConfirmed Boolean?
   SecurityStamp        String?
   TwoFactorEnabled     Boolean?
-  UserName             String @unique
-  avaname                 String?
+  UserName             String? @unique
+  avaname              String?
+  
 }
 
 model Voucher {

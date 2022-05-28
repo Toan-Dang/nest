@@ -28,7 +28,7 @@ import {
 @Controller('users')
 export class UserController {
   constructor(private userService: UserService) {}
-  @UseGuards(AuthGuard('jwt'))
+  //@UseGuards(AuthGuard('jwt'))
   @Get('me')
   getMe(@GetUser('') user: Users) {
     return this.userService.getUser(user);
