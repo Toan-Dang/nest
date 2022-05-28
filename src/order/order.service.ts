@@ -116,17 +116,17 @@ export class OrderService {
     };
     return hmu;
   }
-  async AcceptBill(orderid: string) {
+  async AcceptBill(dto: BillDto) {
     const ord = await this.prisma.order.findUnique({
       where: {
-        id: orderid,
+        id: dto.orderid,
       },
     });
     //wait -> verified -> shipping -> done
     if (ord.Status == 'Wait') {
       await this.prisma.order.update({
         where: {
-          id: orderid,
+          id: dto.orderid,
         },
         data: {
           Status: 'Done',

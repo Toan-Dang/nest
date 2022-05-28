@@ -34,14 +34,13 @@ export class OrderController {
     return this.orderservice.getDetail(userid, orderid);
   }
 
-  @Post(':id')
-  acceptBill(@Param('id') orderid: string) {
-    console.log('here');
-    return this.orderservice.AcceptBill(orderid);
+  @Post('/accept')
+  acceptBill(@Body() dto: BillDto) {
+    return this.orderservice.AcceptBill(dto);
   }
 
   @Post('/cancel')
-  cancelBill(@Body() dto : BillDto) {
+  cancelBill(@Body() dto: BillDto) {
     return this.orderservice.CancelBill(dto);
   }
 
@@ -54,6 +53,4 @@ export class OrderController {
   getUserCancelBill(@GetUser('id') userId: string) {
     return this.orderservice.getUserCancelBill(userId);
   }
-
-
 }
