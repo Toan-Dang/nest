@@ -8,7 +8,15 @@ export class CustomerService {
 
   async getListCustomer() {
     //TODO: Chua co tk admin
-    return await this.prisma.users.findMany();
+    return await this.prisma.users.findMany({
+      select: {
+        UserName: true,
+        FullName: true,
+        Email: true,
+        Address: true,
+        PhoneNumber: true,
+      },
+    });
   }
 
   async getCustomer(cusid: string) {

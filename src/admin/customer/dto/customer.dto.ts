@@ -4,7 +4,7 @@ export class CustomerDto {
   @IsString()
   FullName: string;
   @IsString()
-  Email: string;
+  Birthday: string;
   @IsString()
-  UserName: string;
+  PhoneNumber: string;
 }
