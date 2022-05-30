@@ -214,39 +214,39 @@ model Order {
 model Product {
   id            String        @id @default(auto()) @map("_id") @db.ObjectId
   /// Multiple data types found: String: 5.3%, ProductBattery: 94.7% out of 337 sampled entries
-  Battery       Json
+  Battery       Json?
   /// Multiple data types found: String: 6.5%, ProductCpu: 93.5% out of 337 sampled entries
-  CPU           Json
+  CPU           Json?
   /// Multiple data types found: String: 6.5%, ProductCam: 93.5% out of 337 sampled entries
-  Cam           Json
+  Cam           Json?
   CategoryName  String
   Color         String
-  Conn          ProductConn
-  CurrentOrder  Int
-  Description   String
+  Conn          ProductConn?
+  CurrentOrder  Int?
+  Description   String?
   /// Multiple data types found: String: 6.5%, ProductGraphic: 93.5% out of 337 sampled entries
-  Graphic       Json
+  Graphic       Json?
   IsDelete      Boolean
   MSRP          Int
-  Note          String
+  Note          String?
   /// Multiple data types found: String: 1.2%, ProductOs: 98.8% out of 337 sampled entries
-  OS            Json
-  Picture       String
-  ProductDetail String
-  ProductId     Int
+  OS            Json?
+  Picture       String?
+  ProductDetail String?
+  ProductId     Int?
   ProductName   String
-  Ram           ProductRam
-  RawPrice      Int
-  ReorderLevel  Int
-  Rom           ProductRom
+  Ram           ProductRam?
+  RawPrice      Int?
+  ReorderLevel  Int?
+  Rom           ProductRom?
   /// Multiple data types found: String: 6.5%, ProductScreen: 93.5% out of 337 sampled entries
-  Screen        Json
+  Screen        Json?
   /// Multiple data types found: String: 8.6%, ProductSound: 91.4% out of 337 sampled entries
-  Sound         Json
-  Special       String
-  Struct        ProductStruct
+  Sound         Json?
+  Special       String?
+  Struct        ProductStruct?
   Type          String
-  UnitInOrder   Int
+  UnitInOrder   Int?
   UnitPrice     Int
   Version       String
   View          Int

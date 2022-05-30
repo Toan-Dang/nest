@@ -34,6 +34,21 @@ export class OrderService {
             id: cart,
           },
         });
+        /////////cap nhat luot ban
+        let product = await this.prisma.product.findUnique({
+          where: {
+            id: cartuser.ProductId,
+          },
+        });
+
+        await this.prisma.product.update({
+          where: {
+            id: product.id,
+          },
+          data: {
+            sold: product.sold + 1,
+          },
+        });
       }
       const add = await this.prisma.usersAddress.findFirst({
         where: {
@@ -122,6 +137,7 @@ export class OrderService {
         id: dto.orderid,
       },
     });
+
     //wait -> verified -> shipping -> done
     if (ord.Status == 'Wait') {
       await this.prisma.order.update({

@@ -19,6 +19,15 @@ export class ProductService {
         id: proid,
       },
     });
+    //cap nhat luot view cho sp
+    await this.prisma.product.update({
+      where: {
+        id: proid,
+      },
+      data: {
+        View: product.View + 1,
+      },
+    });
 
     const pro_name = await this.prisma.product.groupBy({
       by: ['Version', 'Color', 'id', 'Picture', 'UnitPrice'],

@@ -1,3 +1,5 @@
+import { ProductAdminModule } from './admin/product_admin/product_admin.module';
+import { CustomerModule } from './admin/customer/customer.module';
 import { AuthModule } from './auth/auth.module';
 import { Module } from '@nestjs/common';
 import { UserModule } from './user/user.module';
@@ -36,6 +38,8 @@ import { GameModule } from './game/game.module';
     HttpModule,
     RecommendModule,
     GameModule,
+    CustomerModule,
+    ProductAdminModule,
   ],
 })
 export class AppModule {}
