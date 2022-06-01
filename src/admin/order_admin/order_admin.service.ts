@@ -1,3 +1,4 @@
+import { identity } from 'rxjs';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 
@@ -6,14 +7,26 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class OrderAdminService {
   constructor(private prisma: PrismaService) {}
   async ListALLOrder() {
-    return await this.prisma.order.findMany({
+    const detail = await this.prisma.order.findMany({
       select: {
         Detail: true,
         OrderDay: true,
         Paid: true,
         id: true,
+        Status: true,
+        CustomerId: true,
       },
     });
+    let res = [];
+    for await (let del of detail) {
+      let username = await this.prisma.users.findUnique({
+        where: {
+          id: del.CustomerId,
+        },
+      });
+      res.push({ ...del, username: username.UserName });
+    }
+    return res;
   }
   async ListWaitOrder() {
     return await this.prisma.order.findMany({
