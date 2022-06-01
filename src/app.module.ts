@@ -1,3 +1,4 @@
+import { OrderAdminModule } from './admin/order_admin/order_admin.module';
 import { ProductAdminModule } from './admin/product_admin/product_admin.module';
 import { CustomerModule } from './admin/customer/customer.module';
 import { AuthModule } from './auth/auth.module';
@@ -40,6 +41,7 @@ import { GameModule } from './game/game.module';
     GameModule,
     CustomerModule,
     ProductAdminModule,
+    OrderAdminModule,
   ],
 })
 export class AppModule {}

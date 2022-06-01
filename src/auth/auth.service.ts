@@ -96,8 +96,8 @@ export class AuthService {
     if (user != null) {
       return { success: false, mess: 'not that email' };
     }
-    //const token = Math.floor(1000 + Math.random() * 9000).toString();
-    //await this.mailService.sendUserConfirmation(user, token);
+    // const token = Math.floor(1000 + Math.random() * 9000).toString();
+    // await this.mailService.sendUserConfirmation(user, token);
     return {
       success: true,
     };
