@@ -8,7 +8,11 @@ export class OrderAdminController {
   ListALLOrder() {
     return this.orderservice.ListALLOrder();
   }
-  @Get('Bill')
+  @Get('wait')
+  ListWaitOrder() {
+    return this.orderservice.ListWaitOrder();
+  }
+  @Get('accept')
   ListAcceptOrder() {
     return this.orderservice.ListAcceptOrder();
   }

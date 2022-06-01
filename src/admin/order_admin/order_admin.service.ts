@@ -15,7 +15,19 @@ export class OrderAdminService {
       },
     });
   }
-
+  async ListWaitOrder() {
+    return await this.prisma.order.findMany({
+      where: {
+        Status: 'Wait',
+      },
+      select: {
+        Detail: true,
+        OrderDay: true,
+        Paid: true,
+        id: true,
+      },
+    });
+  }
   async ListAcceptOrder() {
     return await this.prisma.order.findMany({
       where: {
