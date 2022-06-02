@@ -23,8 +23,12 @@ export class OrderController {
   }
 
   @Get('Bill')
-  getUserBill(@GetUser('id') userId: string) {
-    return this.orderservice.getBill(userId);
+  getUserWaitBill(@GetUser('id') userId: string) {
+    return this.orderservice.getWaitBill(userId);
+  }
+  @Get('ship')
+  getUserShipBill(@GetUser('id') userId: string) {
+    return this.orderservice.getShipBill(userId);
   }
   @Get('detail/:id')
   getUserOrderDetail(

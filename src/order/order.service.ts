@@ -77,7 +77,7 @@ export class OrderService {
       };
     }
   }
-  async getBill(userid: string) {
+  async getWaitBill(userid: string) {
     const order = await this.prisma.order.findMany({
       where: {
         CustomerId: userid,
@@ -96,6 +96,34 @@ export class OrderService {
       return {
         success: false,
         mess: 'Chưa có đơn hàng nào cần xác nhận',
+      };
+    }
+
+    return {
+      success: true,
+      order,
+    };
+  }
+
+  async getShipBill(userid: string) {
+    const order = await this.prisma.order.findMany({
+      where: {
+        CustomerId: userid,
+        Status: {
+          equals: 'Shipping',
+        },
+      },
+      select: {
+        Detail: true,
+        OrderDay: true,
+        Paid: true,
+        id: true,
+      },
+    });
+    if (order.length < 1) {
+      return {
+        success: false,
+        mess: 'Chưa có đơn hàng nào đang vận chuyển',
       };
     }
 

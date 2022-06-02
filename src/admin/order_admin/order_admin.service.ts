@@ -29,7 +29,7 @@ export class OrderAdminService {
     return res;
   }
   async ListWaitOrder() {
-    return await this.prisma.order.findMany({
+    const detail = await this.prisma.order.findMany({
       where: {
         Status: 'Wait',
       },
@@ -38,11 +38,22 @@ export class OrderAdminService {
         OrderDay: true,
         Paid: true,
         id: true,
+        CustomerId: true,
       },
     });
+    let res = [];
+    for await (let del of detail) {
+      let username = await this.prisma.users.findUnique({
+        where: {
+          id: del.CustomerId,
+        },
+      });
+      res.push({ ...del, username: username.UserName });
+    }
+    return res;
   }
   async ListAcceptOrder() {
-    return await this.prisma.order.findMany({
+    const detail = await this.prisma.order.findMany({
       where: {
         Status: 'Verified',
       },
@@ -51,12 +62,23 @@ export class OrderAdminService {
         OrderDay: true,
         Paid: true,
         id: true,
+        CustomerId: true,
       },
     });
+    let res = [];
+    for await (let del of detail) {
+      let username = await this.prisma.users.findUnique({
+        where: {
+          id: del.CustomerId,
+        },
+      });
+      res.push({ ...del, username: username.UserName });
+    }
+    return res;
   }
 
   async ListShippingOrder() {
-    return await this.prisma.order.findMany({
+    const detail = await this.prisma.order.findMany({
       where: {
         Status: 'Shipping',
       },
@@ -65,12 +87,23 @@ export class OrderAdminService {
         OrderDay: true,
         Paid: true,
         id: true,
+        CustomerId: true,
       },
     });
+    let res = [];
+    for await (let del of detail) {
+      let username = await this.prisma.users.findUnique({
+        where: {
+          id: del.CustomerId,
+        },
+      });
+      res.push({ ...del, username: username.UserName });
+    }
+    return res;
   }
 
   async ListDoneOrder() {
-    return await this.prisma.order.findMany({
+    const detail = await this.prisma.order.findMany({
       where: {
         Status: 'Done',
       },
@@ -79,12 +112,23 @@ export class OrderAdminService {
         OrderDay: true,
         Paid: true,
         id: true,
+        CustomerId: true,
       },
     });
+    let res = [];
+    for await (let del of detail) {
+      let username = await this.prisma.users.findUnique({
+        where: {
+          id: del.CustomerId,
+        },
+      });
+      res.push({ ...del, username: username.UserName });
+    }
+    return res;
   }
 
   async ListCancelOrder() {
-    return await this.prisma.order.findMany({
+    const detail = await this.prisma.order.findMany({
       where: {
         Status: 'Canceled',
       },
@@ -93,8 +137,19 @@ export class OrderAdminService {
         OrderDay: true,
         Paid: true,
         id: true,
+        CustomerId: true
       },
     });
+    let res = [];
+    for await (let del of detail) {
+      let username = await this.prisma.users.findUnique({
+        where: {
+          id: del.CustomerId,
+        },
+      });
+      res.push({ ...del, username: username.UserName });
+    }
+    return res;
   }
 
   async toDone(orderid: string) {
