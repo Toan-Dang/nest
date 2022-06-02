@@ -137,7 +137,7 @@ export class OrderAdminService {
         OrderDay: true,
         Paid: true,
         id: true,
-        CustomerId: true
+        CustomerId: true,
       },
     });
     let res = [];
@@ -176,22 +176,13 @@ export class OrderAdminService {
           Status: 'Done',
         },
       });
-    } else if (status.Status == 'Verified') {
-      await this.prisma.order.update({
-        where: {
-          id: orderid,
-        },
-        data: {
-          Status: 'Shipping',
-        },
-      });
     } else if (status.Status == 'Wait') {
       await this.prisma.order.update({
         where: {
           id: orderid,
         },
         data: {
-          Status: 'Verified',
+          Status: 'Shipping',
         },
       });
     }
